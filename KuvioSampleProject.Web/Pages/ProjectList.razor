@@ -1,0 +1,43 @@
+﻿@page "/projects"
+@inherits ProjectListBase
+
+<h3>Projects</h3>
+
+<div>
+    @if (Projects == null)
+    {
+        <div class="spinner"></div>
+    }
+    else
+    {
+        <div class="list">
+            <div class="list-header list-row-project">
+                <div>Title</div>
+                <div>Description</div>
+                <div>Customer</div>
+                <div>Deadline</div>
+            </div>
+        </div>
+        @foreach (var project in Projects)
+        {
+<div class="list-item list-row-project">
+    <div>@project.Title</div>
+    <div>@project.Description</div>
+    <div>@project.CustomerFirstName @project.CustomerLastName</div>
+    <div>
+        @project.Deadline.ToString("m",
+System.Globalization.CultureInfo.CreateSpecificCulture("en-us"))
+    </div>
+    <div class="buttons">
+        <a href="projectdetails/@project.ProjectId" class="btn btn-info m-1">View</a>
+    </div>
+    <div class="buttons">
+        <a href="/editproject/@project.ProjectId" class="btn btn-primary">Edit</a>
+    </div>
+</div>
+
+
+        }
+    }
+</div>
+

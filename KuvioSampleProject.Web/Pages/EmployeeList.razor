@@ -1,0 +1,58 @@
+﻿@page "/"
+@inherits EmployeeListBase
+
+<h3>Employee Directory</h3>
+
+<div>
+    @if (Employees == null)
+    {
+        <div class="spinner"></div>
+    }
+    else
+    {
+
+        @*<form method="get" class="searchBar">
+            <div class="input-group">
+                <input class="form-control" @bind="@SearchTerm" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary" @onclick="OnGet">Search</button>
+                </div>
+            </div>
+        </form>*@
+
+        <div class="list">
+            <div class="list-header list-row">
+                <div>First Name</div>
+                <div>Last Name</div>
+                <div>Country</div>
+                <div>Date of Birth</div>
+            </div>
+        </div>
+        @foreach (var employee in Employees)
+        {
+            <div class="list-item list-row">
+                <div>@employee.FirstName</div>
+                <div>@employee.LastName</div>
+                <div>@employee.Country</div>
+                <div>
+                    @employee.DateOfBirth.ToString("m",
+            System.Globalization.CultureInfo.CreateSpecificCulture("en-us"))
+                </div>
+                <div class="buttons">
+                    <a href="employeedetails/@employee.Id" class="btn btn-info m-1">View</a>
+                </div>
+                <div class="buttons">
+                    <a href="/editemployee/@employee.Id" class="btn btn-primary">Edit</a>
+                </div>
+            </div>
+
+
+        }
+    }
+</div>
+
+
+
+
+
+

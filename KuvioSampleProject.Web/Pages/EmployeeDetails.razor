@@ -1,0 +1,55 @@
+﻿@page "/employeedetails/{id}"
+@page "/employeedetails"
+@inherits EmployeeDetailsBase
+
+@if (Employee == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="employeeName">@Employee.FirstName @Employee.LastName</h1>
+                </div>
+
+                <div class="card-body text-center">
+                    <div class="employeeInfo">
+                        <h4 class="info">First Name:</h4> <h4>@Employee.FirstName</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Last Name:</h4> <h4>@Employee.LastName</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Email:</h4> <h4>@Employee.Email</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Country:</h4> <h4>@Employee.Country</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Date of Birth:</h4> <h4>
+                            @Employee.DateOfBirth.ToString("dd MMMM yyyy",
+System.Globalization.CultureInfo.CreateSpecificCulture("en-us"))
+                    </h4>
+                </div>
+                <div class="employeeInfo">
+                    <h4 class="info">Age:</h4> <h4>@CalculateAge(Employee.DateOfBirth)</h4>
+                </div>
+                </div>
+
+                <div class="card-footer text-center @CssClass">
+                    <a href="/" class="btn btn-secondary">Back</a>
+                    <a href="@($"editemployee/{Employee.Id}")" class="btn btn-primary m-1">Edit</a>
+                    <button type="button" class="btn btn-danger m-1" @onclick="Delete_Click">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<Confirm ConfirmationChanged="ConfirmDelete_Click" @ref="DeleteConfirmation"
+         ConfirmationMessage=@($"Are you sure you want to delete \"{Employee.FirstName}\"?")></Confirm>
+
+

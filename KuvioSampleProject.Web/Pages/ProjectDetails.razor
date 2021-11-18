@@ -1,0 +1,55 @@
+﻿@page "/projectdetails/{id}"
+@page "/projectdetails"
+@inherits ProjectDetailsBase
+
+@if (Project == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="employeeName">@Project.Title</h1>
+                </div>
+
+                <div class="card-body text-center">
+                    <div class="employeeInfo">
+                        <h4 class="info">Title:</h4> <h4>@Project.Title</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Description:</h4> <h4>@Project.Description</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Customer Name:</h4> <h4>@Project.CustomerFirstName @Project.CustomerLastName</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Customer Email:</h4> <h4>@Project.CustomerEmail</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Customer Phone:</h4> <h4>@Project.CustomerPhone</h4>
+                    </div>
+                    <div class="employeeInfo">
+                        <h4 class="info">Deadline:</h4> <h4>
+                            @Project.Deadline.ToString("dd MMMM yyyy",
+System.Globalization.CultureInfo.CreateSpecificCulture("en-us"))
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center @CssClass">
+                    <a href="/projects" class="btn btn-secondary">Back</a>
+                    <a href="@($"editproject/{Project.ProjectId}")" class="btn btn-primary m-1">Edit</a>
+                    <button type="button" class="btn btn-danger m-1" @onclick="Delete_Click">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<Confirm ConfirmationChanged="ConfirmDelete_Click" @ref="DeleteConfirmation"
+         ConfirmationMessage=@($"Are you sure you want to delete \"{Project.Title}\"?")></Confirm>
+
+

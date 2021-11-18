@@ -1,0 +1,79 @@
+﻿@page "/editproject/{id}"
+@page "/editproject"
+
+@inherits EditProjectBase
+
+<EditForm Model="@Project" OnSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <h3>@PageHeaderText</h3>
+    <hr />
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">
+            Title
+        </label>
+        <div class="col-sm-10">
+            <InputText id="title" class="form-control" placeholder="Title" @bind-Value="Project.Title" />
+            <ValidationMessage For="@(()=> Project.Title)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">
+            Description
+        </label>
+        <div class="col-sm-10">
+            <InputText id="description" class="form-control" placeholder="Description" @bind-Value="Project.Description" />
+            <ValidationMessage For="@(()=> Project.Description)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customerFirstName" class="col-sm-2 col-form-label">
+            Customer First Name
+        </label>
+        <div class="col-sm-10">
+            <InputText id="customerFirstName" class="form-control" placeholder="Customer First Name" @bind-Value="Project.CustomerFirstName" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customerLaststName" class="col-sm-2 col-form-label">
+            Customer Last Name
+        </label>
+        <div class="col-sm-10">
+            <InputText id="customerLaststName" class="form-control" placeholder="Customer Last Name" @bind-Value="Project.CustomerLastName" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customerEmail" class="col-sm-2 col-form-label">
+            Customer Email
+        </label>
+        <div class="col-sm-10">
+            <InputText id="customerEmail" class="form-control" placeholder="Customer Email" @bind-Value="Project.CustomerEmail" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customerPhone" class="col-sm-2 col-form-label">
+            Customer Phone
+        </label>
+        <div class="col-sm-10">
+            <InputText id="customerPhone" class="form-control" placeholder="Customer Phone" @bind-Value="Project.CustomerPhone" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="deadline" class="col-sm-2 col-form-label">
+            Deadline
+        </label>
+        <div class="col-sm-10">
+            <InputDate @bind-Value="Project.Deadline" class="form-control" />
+            <p class="obs">*Date format: DD/MM/YYYY</p>
+        </div>
+    </div>
+    <div class="btnPos">
+        <div class="posBtn">
+            <a href="/projects" class="btn btn-secondary">Back</a>
+        </div>
+        <div class="posBtn">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </div>
+
+</EditForm>
+
